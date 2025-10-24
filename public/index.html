@@ -39,6 +39,23 @@
         resize: vertical;
       }
 
+      .fonte-container {
+        margin-bottom: 10px;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+
+      input[type="number"] {
+        width: 50px;
+        padding: 6px;
+        font-size: 14pt;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #888;
+        text-align: center;
+      }
+
       button {
         margin-top: 10px;
         padding: 10px 20px;
@@ -80,7 +97,12 @@
     <div class="input-container">
       <h2>Digite o texto para impressão:</h2>
       <textarea id="textoInput" placeholder="Escreva aqui o texto que deseja imprimir..."></textarea><br />
-      <button onclick="gerarPagina()">Gerar Página</button>
+      <div class="fonte-container">
+        <label for="tamanhoFonte">Tamanho da fonte:</label>
+        <input type="number" id="tamanhoFonte" value="55" min="10" max="200" />
+      </div>
+      <br />
+      <button onclick="gerarPagina()">Visualizar</button>
       <button onclick="window.print()">Imprimir</button>
     </div>
 
@@ -94,11 +116,13 @@
     <script>
       function gerarPagina() {
         const texto = document.getElementById("textoInput").value.trim();
+        const tamanhoFonte = document.getElementById("tamanhoFonte").value;
         const conteudo = document.getElementById("conteudo");
         const textoExemplo = document.getElementById("textoExemplo");
 
         if (texto) {
           textoExemplo.innerText = texto.toUpperCase();
+          textoExemplo.style.fontSize = tamanhoFonte + "pt";
           conteudo.style.display = "block";
           window.scrollTo(0, document.body.scrollHeight);
         }
